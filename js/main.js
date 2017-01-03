@@ -95,8 +95,8 @@ function calculateMacroData(userWeight, totalCalories){
 
 function displayBreakdown(EER, lossgainWeeklyCal) {
 	// displays the data broken down into macro requirement and calorie requirement areas
-	breakdownSection.css({'display': "block"}) // shows the breakdown area after form is submited
-	// result.html(EER + ' cal');
+	breakdownSection.css({'display': "block"}); // shows the breakdown area after form is submited
+	result.text('Calorie/Macronutrient Breakdown');
 
 	// CALORIE BREAKDOWN
 	// maintinance calories
@@ -131,7 +131,7 @@ function displayBreakdown(EER, lossgainWeeklyCal) {
 		var r = macroData[macroDivClass]['recommendation']
 
 		// breakdown text template
-		var text = "Your daily "+ macroDivClass +" intake should be " + g + " grams this is " + p + "% of your total caloric requirement. " + r
+		var text = "Your daily "+ macroDivClass +" intake should be " + g + " grams (" + c + " cal) this is " + p + "% of your total caloric requirement. " + r
 		// gets the p element to display the text
 		$('.' + macroDivClass + ' p').text(text)
 	};
