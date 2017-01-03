@@ -2,6 +2,27 @@ input {
 	width: 50px;
 }
 
+h1 {
+    text-align: center;
+}
+
 #btn {
 	width: inherit;
+}
+
+#tdeeformsection {
+    background-color: pink;
+    alig: left
+}
+
+#resultssection {
+    background-color: lightgreen;
+    height: 100px;
+    width:inherit;
+    /*float: left;*/
+}
+
+.container {
+    align-items: center;
+    position: relative;
 }
