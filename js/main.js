@@ -131,7 +131,7 @@ function displayBreakdown(EER, lossgainWeeklyCal) {
 		var r = macroData[macroDivClass]['recommendation']
 
 		// breakdown text template
-		var text = "Your daily "+ macroDivClass +" intake should be " + g + " grams (" + c + " cal) this is " + p + "% of your total caloric requirement. " + r
+		var text = "Your daily "+ macroDivClass +" intake should be " + g + "g (" + c + " cal) this is " + p + "% of your total caloric requirement. " + r
 		// gets the p element to display the text
 		$('.' + macroDivClass + ' p').text(text)
 	};
