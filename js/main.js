@@ -15,7 +15,7 @@ var modifers = {
 
 var tdeeForm = $('#TDEEform');
 var btn = $('#btn');
-var result = $('#title');
+var heading = $('#title');
 var main = $('#main');
 
 // form data
@@ -33,7 +33,14 @@ var foods
 $.ajax({
 	url: "data/foods.json",
 	success: function(data){
-		foods = JSON.parse(data);
+		// for some reason github pages doesnt need to parse the data 
+		// but on dev server it does
+
+		// for dev server
+		// foods = JSON.parse(data);
+
+		// for github pages erver server
+		foods = data;
 	}
 });
 
@@ -46,16 +53,12 @@ tdeeForm.submit(function (e) {
 	e.preventDefault()
 
 	sex = $('input[name=sex]:checked').val();
-	// console.log(sex);
 	age = $('input[name=age]').val();
-	// console.log(age * 2, typeof age);
 	height = $('input[name=height]').val();
-	// console.log(height * 2, typeof height);
 	weight = $('input[name=weight]').val()
-	// console.log(weight * 2, typeof weight);
 	af = $('#activity').val()
-	// console.log(af * 2, typeof af);
 	lbToLose = $('#lossgain').val()
+
 	if (lbToLose < 0) {
 		weightLoss = true;
 	} else if (lbToLose > 0) {
@@ -65,12 +68,19 @@ tdeeForm.submit(function (e) {
 	// calulations
 	eer = calculateEER(sex, age, height, weight, af);
 	lossgainWeeklyCal = calculateLossGain(eer, lbToLose);
+	loadBreakdownHTML();
+})
 
+function getRndInt(min, max) {
+	// generate random int, inclusive of <min> and <max>
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+function loadBreakdownHTML(){
 	$.ajax({
 		url: 'breakdown.html',
 		dataType: 'html',
 		success: function(data){
-			// console.log(data)
 			$('#main').html(data)
 			displayBreakdown(eer, lossgainWeeklyCal);
 
@@ -82,18 +92,12 @@ tdeeForm.submit(function (e) {
 			});
 		}
 	});
-})
-
-function getRndInt(min, max) {
-	// generate random int, inclusive of <min> and <max>
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
 function calculateEER(sex, age, height, weight, af) {
 	// calculates the Estimated Energy Requrement/Total Daily Energy Expenditure.
 	var sexMods = modifers[sex];
-	// console.log(sexMods)
-	var eer = sexMods.mod + (sexMods.weight /*['weight']*/ * weight) + (sexMods.height * height) - (sexMods.age * age);
+	var eer = sexMods.mod + (sexMods.weight * weight) + (sexMods.height * height) - (sexMods.age * age);
 	return Math.round(eer * af)
 }
 
@@ -136,7 +140,7 @@ function spanH(item) {
 function displayBreakdown(EER, lossgainWeeklyCal) {
 	// displays the data broken down into macro requirement and calorie requirement areas
 	main.css({'display': "block"}); // shows the breakdown area after form is submited
-	result.html('Calorie/Macronutrient Breakdown');
+	heading.html('Calorie/Macronutrient Breakdown');
 
 	// CALORIE BREAKDOWN
 	// maintinance calories
@@ -185,10 +189,14 @@ function loadMealsHTML(){
 		dataType: "html",
 		success: function(data){
 			$('#main').html(data);
-			console.log('hello');
 		}
 	}).then(function(){
-		$('#demo').html(amountOfMeals);
+		var p = dailyMacroData.protein.grams;
+		var f = dailyMacroData.fat.grams;
+		var c = dailyMacroData.carb.grams;
+		var allMeals = makeDayMeals(amountOfMeals, p, f, c);
+		// console.log(allMeals)
+		displayMeals(allMeals);
 	})
 }
 
@@ -197,38 +205,23 @@ function makeDayMeals(amountOfMeals, dayProtein, dayFat, dayCarb){
 	// version 2: divide equally by number of meals, next one you divide again from numebr of meals -1 and so on till you reach 2 and then make meals from those.
 	var i = 0;
 	var meals = [];
-	for (; i < amountOfMeals; i++){
-		/* currentMeal = {
-			"protein source": {
-				"name": "something",
-				"protein": 0,
-				"fat": 0,
-				"carb": 0
-			},
-			"fat source": {
-				"name": "something",
-				"protein": 0,
-				"fat": 0,
-				"carb": 0
-			},
-			"carb source": {
-				"name": "something",
-				"protein": 0,
-				"fat": 0,
-				"carb": 0
-			},
-			"fruitsandveg": {
-				"name": "something",
-				"protein": 0,
-				"fat": 0,
-				"carb": 0
-			}
-			"calories": 0
-		} */
-		var currentMeal = makeMeal(args);
 
+	var mealProtein = dayProtein/amountOfMeals
+	var mealFat = dayFat/amountOfMeals
+	var mealCarb = dayCarb/amountOfMeals
+	for (; i < amountOfMeals-1; i++){
+		var currentMeal = makeMeal(mealProtein, mealFat, mealCarb);
 		meals.push(currentMeal);
 	};
+
+	var lastMealProtein = dailyMacroData["protein"]["grams"];
+	var lastMealFat = dailyMacroData["fat"]["grams"];
+	var lastMealCarb = dailyMacroData["carb"]["grams"];
+
+	var lastMeal = makeMeal(lastMealProtein, lastMealFat, lastMealCarb);
+	meals.push(lastMeal);
+
+	return meals;
 }
 
 function calculatePortionMass(foodData, primaryMacro, MassNeeded){
@@ -238,21 +231,19 @@ function calculatePortionMass(foodData, primaryMacro, MassNeeded){
 }
 
 function primaryMacroSource(foodName, foodData, portionMass){
-	// done
 	foodSource = {
 		"name": foodName
 	};
 	foodSource["protein"] = Math.floor((portionMass * foodData["protein"]) / 100);
 	foodSource["fat"] = Math.floor((portionMass * foodData["fat"]) / 100);
 	foodSource["carb"] = Math.floor((portionMass * foodData["carb"]) / 100);
-	foodSource["foodcals"] = (foodSource["protein"] * 4) + (foodSource["fat"] * 9) + (foodSource["carb"] * 4)
+	foodSource["foodcals"] = (foodSource["protein"] * 4) + (foodSource["fat"] * 9) + (foodSource["carb"] * 4),
+	foodSource["portionmass"] = Math.floor(portionMass);
 	return foodSource;
 };
 
 function makeMeal(mealProteinMass, mealFatMass, mealCarbMass) {
-	// done
 	var mealProtCount, mealFatCount, mealCarbCount;
-	// var meal = {};
 	var meal = {
 			"protein source": {},
 			"fat source": {},
@@ -300,9 +291,54 @@ function makeMeal(mealProteinMass, mealFatMass, mealCarbMass) {
 	for (var item in meal){
 		dailyMacroData["protein"]["grams"] -= meal[item]["protein"]
 		dailyMacroData["fat"]["grams"] -= meal[item]["fat"]
-		dailyMacroData["carb"]["grams"] -= meal[item]["carb"]
-		dailyMacroData["carb"]["grams"] -= meal[item]["carb"]
+		dailyMacroData["carb"]["grams"] -= meal[item]["carb"] // for carb source
+		dailyMacroData["carb"]["grams"] -= meal[item]["carb"] //for fruits and veg
 	};
 
 	return meal;
+}
+
+function displayMeals(meals){
+	heading.text('Meals');
+	var i = 0;
+	var m = $('#main');
+	for (; i < meals.length; i++){
+		m.append($('<h4>').text('Meal '+(i+1)));
+		var meal = meals[i];
+
+		var row = $('<div>').attr('class', 'row');
+
+		// for the food pics and portion
+		for (var group in meal) {
+			var food = $('<div>').attr('class', 'col-md-2');s
+			var foodPic = $('<img>').attr('src', '/img/'+meal[group]["name"]+'.jpg');
+			// food name: amount
+			var foodData = $('<strong>').text(meal[group]["name"]+': '+meal[group]["portionmass"]+'g');
+			food.append(foodPic, foodData);
+			row.append(food);
+		}
+
+		var pGet = meal["protein source"];
+		var fGet = meal["fat source"];
+		var cGet = meal["carb source"];
+		var vGet = meal["fruitsandveg"];
+
+		var p = pGet.protein + fGet.protein + cGet.protein + vGet.protein;
+		var f = pGet.fat + fGet.fat + cGet.fat + vGet.fat;
+		var c = pGet.carb + fGet.carb + cGet.carb + vGet.carb;
+		var cals = pGet.foodcals + fGet.foodcals + cGet.foodcals + vGet.foodcals;
+
+		var tableDiv = $('<div>').attr('class', 'col-md-2');
+		var mealData = $('<table>').css({'margin-top':'35px'});
+		var tableHead = $('<th>').html('Totals');
+		var proteinCell = $('<tr>').html("<b>Protein:</b> " + p + ' cals');
+		var fatCell = $('<tr>').html("<b>Fat:</b> " + f + ' cals');
+		var carbCell = $('<tr>').html("<b>Carbs:</b> " + c + ' cals');
+		var calCell = $('<tr>').html("<b>Calories:</b> " + cals + ' cals');
+		mealData.append(tableHead, proteinCell, fatCell, carbCell, calCell);
+
+		tableDiv.append(mealData);
+		row.append(tableDiv);
+		m.append(row)
+	};
 }
