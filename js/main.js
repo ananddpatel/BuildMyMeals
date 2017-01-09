@@ -311,7 +311,7 @@ function displayMeals(meals){
 		// for the food pics and portion
 		for (var group in meal) {
 			var food = $('<div>').attr('class', 'col-md-2');
-			var foodPic = $('<img>').attr('src', '/img/'+meal[group]["name"]+'.jpg');
+			var foodPic = $('<img>').attr('src', 'img/'+meal[group]["name"]+'.jpg');
 			// food name: amount
 			var foodData = $('<strong>').text(meal[group]["name"]+': '+meal[group]["portionmass"]+'g');
 			food.append(foodPic, foodData);
