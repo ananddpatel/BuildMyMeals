@@ -33,11 +33,11 @@ $.ajax({
 		// but on dev server it does
 
 		// for dev server
-		foods = JSON.parse(data);
-		console.log(foods);
+		// foods = JSON.parse(data);
+		// console.log(foods);
 
 		// for github pages server
-		// foods = data;
+		foods = data;
 	}
 });
 
