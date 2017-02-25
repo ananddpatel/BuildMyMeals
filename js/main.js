@@ -191,55 +191,10 @@ function loadMealsHTML(){
 		dayProtein = dailyMacroData.protein.grams;
 		dayFat = dailyMacroData.fat.grams;
 		dayCarb = dailyMacroData.carb.grams;
-		// var allMeals = makeDayMeals(amountOfMeals, dayProtein, dayFat, dayCarb);
-		// console.log(allMeals)
-		// displayMeals(allMeals);
+		
 		displayMeals(amountOfMeals);
 	})
 }
-
-// function makeDayMeals(amountOfMeals, dayProtein, dayFat, dayCarb){
-// 	// version 1: all meals have same amount of calories except the last one is modified for remaining calories.
-// 	// version 2: divide equally by number of meals, next one you divide again from numebr of meals -1 and so on till you reach 2 and then make meals from those.
-// 	var i = 0;
-// 	var meals = [];
-
-// 	var mealProtein = dayProtein/amountOfMeals
-// 	var mealFat = dayFat/amountOfMeals
-// 	var mealCarb = dayCarb/amountOfMeals
-// 	for (; i < amountOfMeals-1; i++){
-// 		var currentMeal = makeMeal(mealProtein, mealFat, mealCarb);
-// 		meals.push(currentMeal);
-// 	};
-
-// 	var lastMealProtein = dailyMacroData["protein"]["grams"];
-// 	var lastMealFat = dailyMacroData["fat"]["grams"];
-// 	var lastMealCarb = dailyMacroData["carb"]["grams"];
-
-// 	var lastMeal = makeMeal(lastMealProtein, lastMealFat, lastMealCarb);
-// 	meals.push(lastMeal);
-
-// 	return meals;
-// }
-
-// function calculatePortionMass(foodData, primaryMacro, MassNeeded){
-// 	// calculates the portion mass of the food
-// 	// multiply by 100 b/c data in foods.json is per 100g of the food
-// 	return (MassNeeded * 100) / foodData[primaryMacro];
-// }
-
-// function primaryMacroSource(foodName, foodData, portionMass){
-// 	foodSource = {
-// 		"name": foodName
-// 	};
-// 	foodSource["protein"] = Math.floor((portionMass * foodData["protein"]) / 100);
-// 	foodSource["fat"] = Math.floor((portionMass * foodData["fat"]) / 100);
-// 	foodSource["carb"] = Math.floor((portionMass * foodData["carb"]) / 100);
-// 	foodSource["foodcals"] = (foodSource["protein"] * 4) + (foodSource["fat"] * 9) + (foodSource["carb"] * 4),
-// 	foodSource["portionmass"] = Math.floor(portionMass);
-// 	return foodSource;
-// };
-
 
 function makeMacrosPerMealTable(amountOfMeals, p, f, c) {
 	protein = Math.round(p/amountOfMeals);
