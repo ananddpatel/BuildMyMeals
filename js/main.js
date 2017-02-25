@@ -5,7 +5,7 @@ var modifers = {
 		height: 12.7,
 		age: 6.8
 	},
-	Female:{
+	"Female":{
 		mod: 655,
 		weight: 4.35,
 		height: 4.7,
@@ -21,14 +21,10 @@ var main = $('#main');
 // form data
 var sex, age, height, weight, af, lbToLose;
 
-var lossgainWeeklyCal;
-var eer;
-var weightLoss;
+var lossgainWeeklyCal, eer, weightLoss;
 
 // meal maker vars
-var dailyMacroData;
-var numMeals;
-var foods
+var dailyMacroData, numMeals, foods;
 
 $.ajax({
 	url: "data/foods.json",
@@ -37,10 +33,11 @@ $.ajax({
 		// but on dev server it does
 
 		// for dev server
-		// foods = JSON.parse(data);
+		foods = JSON.parse(data);
+		console.log(foods);
 
-		// for github pages erver server
-		foods = data;
+		// for github pages server
+		// foods = data;
 	}
 });
 
@@ -191,154 +188,151 @@ function loadMealsHTML(){
 			$('#main').html(data);
 		}
 	}).then(function(){
-		var p = dailyMacroData.protein.grams;
-		var f = dailyMacroData.fat.grams;
-		var c = dailyMacroData.carb.grams;
-		var allMeals = makeDayMeals(amountOfMeals, p, f, c);
+		dayProtein = dailyMacroData.protein.grams;
+		dayFat = dailyMacroData.fat.grams;
+		dayCarb = dailyMacroData.carb.grams;
+		// var allMeals = makeDayMeals(amountOfMeals, dayProtein, dayFat, dayCarb);
 		// console.log(allMeals)
-		displayMeals(allMeals);
+		// displayMeals(allMeals);
+		displayMeals(amountOfMeals);
 	})
 }
 
-function makeDayMeals(amountOfMeals, dayProtein, dayFat, dayCarb){
-	// version 1: all meals have same amount of calories except the last one is modified for remaining calories.
-	// version 2: divide equally by number of meals, next one you divide again from numebr of meals -1 and so on till you reach 2 and then make meals from those.
-	var i = 0;
-	var meals = [];
+// function makeDayMeals(amountOfMeals, dayProtein, dayFat, dayCarb){
+// 	// version 1: all meals have same amount of calories except the last one is modified for remaining calories.
+// 	// version 2: divide equally by number of meals, next one you divide again from numebr of meals -1 and so on till you reach 2 and then make meals from those.
+// 	var i = 0;
+// 	var meals = [];
 
-	var mealProtein = dayProtein/amountOfMeals
-	var mealFat = dayFat/amountOfMeals
-	var mealCarb = dayCarb/amountOfMeals
-	for (; i < amountOfMeals-1; i++){
-		var currentMeal = makeMeal(mealProtein, mealFat, mealCarb);
-		meals.push(currentMeal);
-	};
+// 	var mealProtein = dayProtein/amountOfMeals
+// 	var mealFat = dayFat/amountOfMeals
+// 	var mealCarb = dayCarb/amountOfMeals
+// 	for (; i < amountOfMeals-1; i++){
+// 		var currentMeal = makeMeal(mealProtein, mealFat, mealCarb);
+// 		meals.push(currentMeal);
+// 	};
 
-	var lastMealProtein = dailyMacroData["protein"]["grams"];
-	var lastMealFat = dailyMacroData["fat"]["grams"];
-	var lastMealCarb = dailyMacroData["carb"]["grams"];
+// 	var lastMealProtein = dailyMacroData["protein"]["grams"];
+// 	var lastMealFat = dailyMacroData["fat"]["grams"];
+// 	var lastMealCarb = dailyMacroData["carb"]["grams"];
 
-	var lastMeal = makeMeal(lastMealProtein, lastMealFat, lastMealCarb);
-	meals.push(lastMeal);
+// 	var lastMeal = makeMeal(lastMealProtein, lastMealFat, lastMealCarb);
+// 	meals.push(lastMeal);
 
-	return meals;
+// 	return meals;
+// }
+
+// function calculatePortionMass(foodData, primaryMacro, MassNeeded){
+// 	// calculates the portion mass of the food
+// 	// multiply by 100 b/c data in foods.json is per 100g of the food
+// 	return (MassNeeded * 100) / foodData[primaryMacro];
+// }
+
+// function primaryMacroSource(foodName, foodData, portionMass){
+// 	foodSource = {
+// 		"name": foodName
+// 	};
+// 	foodSource["protein"] = Math.floor((portionMass * foodData["protein"]) / 100);
+// 	foodSource["fat"] = Math.floor((portionMass * foodData["fat"]) / 100);
+// 	foodSource["carb"] = Math.floor((portionMass * foodData["carb"]) / 100);
+// 	foodSource["foodcals"] = (foodSource["protein"] * 4) + (foodSource["fat"] * 9) + (foodSource["carb"] * 4),
+// 	foodSource["portionmass"] = Math.floor(portionMass);
+// 	return foodSource;
+// };
+
+
+function makeMacrosPerMealTable(amountOfMeals, p, f, c) {
+	protein = Math.round(p/amountOfMeals);
+	fat = Math.round(f/amountOfMeals);
+	carb = Math.round(c/amountOfMeals);
+	calories = protein*4 + fat*9 + carb*4;
+
+	var tables = $('<table>', {class: "table table-bordered"});
+	var head = $('<tr>');
+	var info = $('<tr>');
+
+	head.append(
+		$('<th>', {text: "Protein g/meal"}),
+		$('<th>', {text: "Fats g/meal"}),
+		$('<th>', {text: "Carbohydrates g/meal"}),
+		$('<th>', {text: "Calories cals/meal"})
+	);
+
+	info.append(
+		$('<td>', {text: protein+"g"}),
+		$('<td>', {text: fat+"g"}),
+		$('<td>', {text: carb+"g"}),
+		$('<td>', {text: calories+"cals"})
+	);
+
+	tables.append(
+		$('<tbody>').append(head),
+		$('<tbody>').append(info)
+	);
+
+	// return $('<div>', {class: "container"}).append(tables);
+	return tables;
 }
 
-function calculatePortionMass(foodData, primaryMacro, MassNeeded){
-	// calculates the portion mass of the food
-	// multiply by 100 b/c data in foods.json is per 100g of the food
-	return (MassNeeded * 100) / foodData[primaryMacro];
+function getRandomFood(foodList) {
+	var rng = getRndInt(0, foodList.length-1);
+	return foodList[rng];
 }
 
-function primaryMacroSource(foodName, foodData, portionMass){
-	foodSource = {
-		"name": foodName
-	};
-	foodSource["protein"] = Math.floor((portionMass * foodData["protein"]) / 100);
-	foodSource["fat"] = Math.floor((portionMass * foodData["fat"]) / 100);
-	foodSource["carb"] = Math.floor((portionMass * foodData["carb"]) / 100);
-	foodSource["foodcals"] = (foodSource["protein"] * 4) + (foodSource["fat"] * 9) + (foodSource["carb"] * 4),
-	foodSource["portionmass"] = Math.floor(portionMass);
-	return foodSource;
-};
+function makeFoodMacroTable(food) {
+	var table = $('<table>', {class: "table table-bordered"});
+	var head = $('<td>', {align: "center", colspan: "2", text: food+"/100g"});
+	var foodObject = foods["foods"][food];
+	var protein = $('<tr>').append(
+		$('<td>', {text: "Protein"}),
+		$('<td>', {text: foodObject.protein + "g"})
+	)
+	var fat = $('<tr>').append(
+		$('<td>', {text: "Fats"}),
+		$('<td>', {text: foodObject.fat + "g"})
+	)
+	var carb = $('<tr>').append(
+		$('<td>', {text: "Carbohydrates"}),
+		$('<td>', {text: foodObject.carb + "g"})
+	)
+	var cals = $('<tr>').append(
+		$('<td>', {text: "Calories"}),
+		$('<td>', {text: foodObject.calories + "cals"})
+	)
 
-function makeMeal(mealProteinMass, mealFatMass, mealCarbMass) {
-	var mealProtCount, mealFatCount, mealCarbCount;
-	var meal = {
-			"protein source": {},
-			"fat source": {},
-			"carb source": {},
-			"fruitsandveg": {}
-		};
+	table.append(
+		$('<thead>').append(head),
+		$('<tbody>').append(protein, fat, carb, cals)
+	);
 
-	var protSourceItems = foods["protein source"];
-	var protSourceFood = protSourceItems[getRndInt(0, protSourceItems.length-1)];
-
-	var fatSourceItems = foods["fat source"];
-	var fatSourceFood = fatSourceItems[getRndInt(0, fatSourceItems.length-1)];
-
-	var carbSourceItems = foods["carb source"];
-	var carbSourceFood = carbSourceItems[getRndInt(0, carbSourceItems.length-1)];
-
-	var vegSourceItems = foods["fruitsandveg"];
-	var vegSourceFood = vegSourceItems[getRndInt(0, vegSourceItems.length-1)];
-
-	proteinPortionMass = calculatePortionMass(
-										foods["foods"][protSourceFood],
-										"protein",
-										mealProteinMass
-									);
-	meal["protein source"] = primaryMacroSource(protSourceFood, foods["foods"][protSourceFood], proteinPortionMass);
-
-	fatPortionMass = calculatePortionMass(
-										foods["foods"][fatSourceFood],
-										"fat",
-										mealFatMass
-									);
-	meal["fat source"] = primaryMacroSource(fatSourceFood, foods["foods"][fatSourceFood], fatPortionMass);
-
-	carbPortionMass = calculatePortionMass(
-										foods["foods"][carbSourceFood],
-										"carb",
-										mealCarbMass
-									)/2;
-	meal["carb source"] = primaryMacroSource(carbSourceFood, foods["foods"][carbSourceFood], carbPortionMass);
-
-	vegPortionMass = carbPortionMass/2
-	meal["fruitsandveg"] = primaryMacroSource(vegSourceFood, foods["foods"][vegSourceFood], vegPortionMass);
-
-	// now update the total day macros
-	for (var item in meal){
-		dailyMacroData["protein"]["grams"] -= meal[item]["protein"]
-		dailyMacroData["fat"]["grams"] -= meal[item]["fat"]
-		dailyMacroData["carb"]["grams"] -= meal[item]["carb"] // for carb source
-		dailyMacroData["carb"]["grams"] -= meal[item]["carb"] //for fruits and veg
-	};
-
-	return meal;
+	// return $('<div>', {class: "table-responsivess"}).append(table);
+	return table;
 }
 
-function displayMeals(meals){
+function makeMeal(){
+	var row = $('<div>', {class: "row"});
+	var categories = ["protein source", "fat source", "carb source", "fruitsandveg"]
+
+	for (var i = 0; i < categories.length; i++) {
+		var foodCol = $('<div>', {class: "col-sm-3 col-md-3"});
+		var food = getRandomFood(foods[categories[i]]);
+		var img = $('<img>', {src: "img/"+food+".jpg"});
+		var table = makeFoodMacroTable(food);
+
+		foodCol.append(img, table);
+		row.append(foodCol);
+	}
+
+	return row;
+}
+
+function displayMeals(meals) {
+	var main = $('#main');
 	heading.text('Meals');
-	var i = 0;
-	var m = $('#main');
-	for (; i < meals.length; i++){
-		m.append($('<h4>').text('Meal '+(i+1)));
-		var meal = meals[i];
+	$('#mealRec').append(makeMacrosPerMealTable(amountOfMeals, dayProtein, dayFat, dayCarb));
 
-		var row = $('<div>').attr('class', 'row');
-
-		// for the food pics and portion
-		for (var group in meal) {
-			var food = $('<div>').attr('class', 'col-md-2');
-			var foodPic = $('<img>').attr('src', 'img/'+meal[group]["name"]+'.jpg');
-			// food name: amount
-			var foodData = $('<strong>').text(meal[group]["name"]+': '+meal[group]["portionmass"]+'g');
-			food.append(foodPic, foodData);
-			row.append(food);
-		}
-
-		var pGet = meal["protein source"];
-		var fGet = meal["fat source"];
-		var cGet = meal["carb source"];
-		var vGet = meal["fruitsandveg"];
-
-		var p = pGet.protein + fGet.protein + cGet.protein + vGet.protein;
-		var f = pGet.fat + fGet.fat + cGet.fat + vGet.fat;
-		var c = pGet.carb + fGet.carb + cGet.carb + vGet.carb;
-		var cals = pGet.foodcals + fGet.foodcals + cGet.foodcals + vGet.foodcals;
-
-		var tableDiv = $('<div>').attr('class', 'col-md-2');
-		var mealData = $('<table>').css({'margin-top':'35px'});
-		var tableHead = $('<th>').html('Totals');
-		var proteinCell = $('<tr>').html("<b>Protein:</b> " + p + ' cals');
-		var fatCell = $('<tr>').html("<b>Fat:</b> " + f + ' cals');
-		var carbCell = $('<tr>').html("<b>Carbs:</b> " + c + ' cals');
-		var calCell = $('<tr>').html("<b>Calories:</b> " + cals + ' cals');
-		mealData.append(tableHead, proteinCell, fatCell, carbCell, calCell);
-
-		tableDiv.append(mealData);
-		row.append(tableDiv);
-		m.append(row)
-	};
+	for (var i = 0; i < meals; i++) {
+		var mealnum = $('<h3>', {text: "Meal "+(i+1)});
+		main.append(mealnum, makeMeal());
+	}
 }

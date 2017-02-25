@@ -12,7 +12,7 @@ h1 {
 
 #tdeeformsection {
     background-color: pink;
-    alig: left
+    /*alig: left*/
 }
 
 #resultssection {
@@ -25,4 +25,56 @@ h1 {
 .container {
     align-items: center;
     position: relative;
+}
+
+
+body {
+    background-color: honeydew;
+}
+
+input, label, select {
+    margin-bottom: 5px;
+}
+
+form {
+    /*align-self: center;*/
+font-size: 18px
+}
+
+.container {
+    max-width: 1000px;
+}
+
+.form-control {
+    background-color: #f6fff6;
+}
+
+#title {
+    text-align: center;
+}
+
+#breakdown {
+    display: none;
+}
+
+.highlight {
+    font-weight: bold;
+}
+
+span {
+    font-weight: bold;
+    font-size: large;
+}
+
+div>h4 {
+    font-weight: 700;
+}
+
+.mealamountform {
+    width: 50%;
+    float: left
+}
+
+.buildit button {
+    margin-left: 15px;
 }
