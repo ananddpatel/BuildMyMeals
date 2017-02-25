@@ -1,98 +1,84 @@
-
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-
-    <title>Starter Template for Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <!-- <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet"> -->
-
-    <!-- Custom styles for this template -->
-    <!-- <link href="starter-template.css" rel="stylesheet"> -->
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <!-- <script src="../../assets/js/ie-emulation-modes-warning.js"></script> -->
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="img/favicon.bmp">
+  <title>BuildMyMeals</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+  <link href="css/style2.css" rel="stylesheet">
+</head>
+<body class="green">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">BuildMyMeals</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a data-toggle="modal" data-target="#myModal">Disclaimer</a></li>
+          <li><a href="https://github.com/ananddpatel">Contact</a></li>
+        </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Build My Meals!</h1>
+        <p>It's hard to eat healhy when theres so many options.</p>
+        <p>Enter your body measurements and let us handle your meal prep.</p>
+        <p><a class="btn btn-primary btn-lg" href="build.html" role="button">Start Now</a></p>
+      </div>
+    </div>
     <div class="container">
-
-      <!-- <div class="starter-template"> -->
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-      <!-- </div> -->
-
-      	<div class="row">
-      		<div class="col-md-3" style="background-color: #983434">1</div>
-      		<div class="col-md-3" style="background-color: #8B2537">1</div>
-      		<div class="col-md-3" style="background-color: #54363B">1</div>
-      		<div class="col-md-3" style="background-color: #2F84A7">1</div>
-      	</div>
-
-      	<div class="row">
-      		<div class="col-md-3" style="background-color: pink">2</div>
-      		<div class="col-md-3" style="background-color: pink">2</div>
-      		<div class="col-md-3" style="background-color: pink">2</div>
-      		<div class="col-md-3" style="background-color: pink">2</div>
-      	</div>
-
-      	<div class="row">
-      		<div class="col-md-3" style="background-color: pink">3</div>
-      		<div class="col-md-3" style="background-color: pink">3</div>
-      		<div class="col-md-3" style="background-color: pink">3</div>
-      		<div class="col-md-3" style="background-color: pink">3</div>
-      	</div>
-    </div><!-- /.container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-  </body>
-</html>
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Calorie Breakdown</h2>
+          <p>Enter your body measurements and get a complete breakdown of your calories based on your goals. Calories needed to lose, gain or maintain your weight. How much of your macronutrient intake daily is needed to reach your goals.</p>
+        </div>
+        <div class="col-md-4">
+          <h2>Meal Recommendations</h2>
+          <p>Each meal should have a lean protein, healthy and essential fats, complex carbohydrates, and fiber from fruits and vegetable. BuildMyMeals generates different meals so you never get bored by eating the same thing everyday.</p>
+        </div>
+        <div class="col-md-4">
+          <h2>Exercise</h2>
+          <p>Diet is key, but daily 15-30mins of exercise is proven to help reduce your chances of weight related diseases and improves your psycholoical health. Coupling a healthy diet with exercise is a recipie for success.</p>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <hr>
+        <footer class="footer">
+          <p>&copy; 2017 <a href="https://github.com/ananddpatel">github.com/ananddpatel</a></p>
+        </footer>
+      </div>
+      <div class="container">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="disclaimer">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModal">Disclaimer</h4>
+              </div>
+              <div class="modal-body">
+                This information created and presented on this website is for informational and educational purposes only. Please consult a medical
+                professional before changing your diet or lifestyle or following the recommendations presented on this website.
+              </div>
+              <div class="modal-footer">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </body>
+  </html>

@@ -191,7 +191,7 @@ function loadMealsHTML(){
 		dayProtein = dailyMacroData.protein.grams;
 		dayFat = dailyMacroData.fat.grams;
 		dayCarb = dailyMacroData.carb.grams;
-		
+
 		displayMeals(amountOfMeals);
 	})
 }

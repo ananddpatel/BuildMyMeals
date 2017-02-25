@@ -1,0 +1,38 @@
+body {
+  padding-top: 50px;
+  /*background-color: red*/
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+.navbar-inverse {
+	background-color: #9bf18f;
+	border-color: grey;
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
+	color: black;
+}
+
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-nav>li>a:hover {
+	color: green;
+}
+
+.jumbotron {
+	background-color: #abd0b7
+}
+
+.green {
+	background-color: #c1dec1;
+}
+
+span {
+    font-weight: bold;
+    font-size: large;
+}
+
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th, .table>tbody+tbody{
+	border:1px solid white;
+}

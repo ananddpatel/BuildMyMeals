@@ -1,100 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-    <title>Brobuilds</title>
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- Custom styles for this template -->
-    <link href="css/jumbotron-narrow.css" rel="stylesheet">
-    <!-- Latest compiled and minified JavaScript -->
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-  </head>
-  <body>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="img/favicon.bmp">
+  <title>BuildMyMeals</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+  <link href="css/style2.css" rel="stylesheet">
+</head>
+<body class="green">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">BroBuilds</a>
-          </div>
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">Disclaimer</a></li>
-              <li><a data-toggle="modal" data-target="#myModal">About</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
-            </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-          </nav>
-          <h2 id="title">Total Daily Energy Expenditure</h2>
-          <section id="main">
-            <form id="TDEEform" class="form-group">
-              Height (inches): <input class="form-control" type="number" name="height">
-              <!-- Inches: <input type="number" name="inches"> -->
-              Weight (lb): <input class="form-control" type="number" name="weight">
-              Age: <input class="form-control" type="number" name="age">
-              Activity: <select id="activity" class="form-control">
-                <option value="1.2">sedentary (little or no exercise)</option>
-                <option value="1.375">lightly active (light exercise/sports 1-3 days/week)</option>
-                <option value="1.55">moderatetely active (moderate exercise/sports 3-5 days/week)</option>
-                <option value="1.725">very active (hard exercise/sports 6-7 days a week)</option>
-                <option value="1.9">extra active (very hard exercise/sports and physical job or 2x training)</option>
-              </select>
-              Weight to lose/gain: <select id="lossgain" class="form-control">
-                <option value="-2">-2 lb/week</option>
-                <option value="-1.5">-1.5 lb/week</option>
-                <option value="-1">-1 lb/week</option>
-                <option value="0" selected>0 lb/week</option>
-                <option value="1">+1 lb/week</option>
-                <option value="1.5">+1.5 lb/week</option>
-                <option value="2">+2 lb/week</option>
-              </select>
-              <div class="radio">
-                <input type="radio" name="sex" id="r1" value="Male" checked/><label for="maleRadio">Male</label> &nbsp &nbsp
-                <input type="radio" name="sex" id="r1" value="Female" /><label for="femaleRadio">Female</label>
-              </div>
-              <input class="btn btn-lg btn-primary btn-block" type="submit" value="Calculate!" name="tdeeSubmit" id="btn">
-            </form>
-          </section>
-          <div id="breakdown" class="row marketing">
-            
-          </div>
-          <footer class="footer">
-            <p>&copy; 2017 <a href="https://github.com/ananddpatel">github.com/ananddpatel</a></p>
-          </footer>
-          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="myModalLabel">About</h4>
-                </div>
-                <div class="modal-body">
-                  This information created and presented on this website is for informational and educational purposes only. Please consult a medical
-                  professional before changing your diet or lifestyle or following the recommendations presented on this website.
-                </div>
-                <div class="modal-footer">
-                </div>
-              </div>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">BuildMyMeals</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a data-toggle="modal" data-target="#myModal">Disclaimer</a></li>
+          <li><a href="https://github.com/ananddpatel">Contact</a></li>
+        </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div class="container">
+      <h2 id="title">Total Daily Energy Expenditure</h2>
+      <section id="main">
+        <form id="TDEEform" class="form-group">
+          Height (inches): <input class="form-control" type="number" name="height">
+          <!-- Inches: <input type="number" name="inches"> -->
+          Weight (lb): <input class="form-control" type="number" name="weight">
+          Age: <input class="form-control" type="number" name="age">
+          Activity: <select id="activity" class="form-control">
+            <option value="1.2">sedentary (little or no exercise)</option>
+            <option value="1.375">lightly active (light exercise/sports 1-3 days/week)</option>
+            <option value="1.55">moderatetely active (moderate exercise/sports 3-5 days/week)</option>
+            <option value="1.725">very active (hard exercise/sports 6-7 days a week)</option>
+            <option value="1.9">extra active (very hard exercise/sports and physical job or 2x training)</option>
+          </select>
+          Weight to lose/gain: <select id="lossgain" class="form-control">
+            <option value="-2">-2 lb/week</option>
+            <option value="-1.5">-1.5 lb/week</option>
+            <option value="-1">-1 lb/week</option>
+            <option value="0" selected>0 lb/week</option>
+            <option value="1">+1 lb/week</option>
+            <option value="1.5">+1.5 lb/week</option>
+            <option value="2">+2 lb/week</option>
+          </select>
+          <input type="radio" name="sex" id="r1" value="Male" checked/> Male &nbsp &nbsp
+          <input type="radio" name="sex" id="r1" value="Female" /> Female
+          <input class="btn btn-lg btn-primary btn-block" type="submit" value="Calculate!" name="tdeeSubmit" id="btn">
+        </form>
+      </section>
+      <div id="breakdown" class="row marketing">
+      </div>
+      <div class="container-fluid">
+        <footer class="footer">
+          <p>&copy; 2017 <a href="https://github.com/ananddpatel">github.com/ananddpatel</a></p>
+        </footer>
+      </div>
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="disclaimer">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModal">Disclaimer</h4>
+            </div>
+            <div class="modal-body">
+              This information created and presented on this website is for informational and educational purposes only. Please consult a medical
+              professional before changing your diet or lifestyle or following the recommendations presented on this website.
+            </div>
+            <div class="modal-footer">
             </div>
           </div>
-          </div> <!-- /container -->
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-          <script src="js/main.js"></script>
-        </body>
-      </html>
+        </div>
+      </div>
+      
+      </div> <!-- /container -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      <script src="js/main.js"></script>
+    </div>
+  </body>
+</html>
