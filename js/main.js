@@ -27,14 +27,13 @@ var lossgainWeeklyCal, eer, weightLoss;
 var dailyMacroData, numMeals, foods;
 
 $.ajax({
-	url: "data/foods.json",
+	url: "../data/foods.json",
 	success: function(data){
 		// for some reason github pages doesnt need to parse the data 
-		// but on dev server it does
+		// but on windows dev server it does
 
-		// for dev server
+		// for windows dev server
 		// foods = JSON.parse(data);
-		// console.log(foods);
 
 		// for github pages server
 		foods = data;
@@ -271,7 +270,7 @@ function makeMeal(){
 	for (var i = 0; i < categories.length; i++) {
 		var foodCol = $('<div>', {class: "col-sm-3 col-md-3"});
 		var food = getRandomFood(foods[categories[i]]);
-		var img = $('<img>', {src: "img/"+food+".jpg"});
+		var img = $('<img>', {src: "../img/"+food+".jpg"});
 		var table = makeFoodMacroTable(food);
 
 		foodCol.append(img, table);
