@@ -21,7 +21,14 @@ body {
 }
 
 .jumbotron {
-	background-color: #abd0b7
+    background-color: #abd0b7;
+    background-image: url("../img/jumbotronBG.jpg");
+    background-size: cover;
+}
+
+.jumbotron>.container>h1, .jumbotron>.container p  {
+    color: white;
+    opacity: 1;
 }
 
 .green {
